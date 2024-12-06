@@ -1,4 +1,4 @@
-public class Node <T extends Comparable>{
+public class Node <T extends Comparable<T>>{
     T value;
     Node<T> next;
     public Node(T val){
