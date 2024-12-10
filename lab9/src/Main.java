@@ -1,12 +1,14 @@
 public class Main {
     public static void main(String[] args) throws Exception {
-        Graph<Integer> MyGraph = new Graph();
+        Graph<Integer> MyGraph = new Graph<>();
+        MyGraph.addVertex(0);
         MyGraph.addVertex(1);
         MyGraph.addVertex(2);
         MyGraph.addVertex(3);
         MyGraph.addVertex(4);
 
         MyGraph.addEdge(1,2);
+        MyGraph.addEdge(0,1);
         MyGraph.addEdge(2,3);
         MyGraph.addEdge(2,4);
         MyGraph.addEdge(2,1);

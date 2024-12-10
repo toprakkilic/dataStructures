@@ -1,4 +1,4 @@
-public class Edge <T extends Comparable>{
+public class Edge <T extends Comparable<T>>{
     T vertexID;
     Edge<T> nextEdge;
     public Edge(T vertexID){
