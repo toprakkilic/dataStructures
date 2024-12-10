@@ -8,14 +8,14 @@ public class LinkedList<T> {
 
     public void addToFront(T val) {
 
-        Node<T> newNode = new Node(val);
+        Node<T> newNode = new Node<T>(val);
         newNode.next = Head;
         Head = newNode;
 
     }
 
     public void addToEnd(T val) {
-        Node<T> newNode = new Node<>(val);
+        Node<T> newNode = new Node<T>(val);
         if (Head == null) {
             Head = newNode;
         } else {
