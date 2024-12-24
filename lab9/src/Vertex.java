@@ -1,4 +1,4 @@
-public class Vertex <T extends Comparable> {
+public class Vertex <T extends Comparable<T>> {
     T vertexID;
     Vertex<T> nextVertex;
     Edge<T> edgeLink;

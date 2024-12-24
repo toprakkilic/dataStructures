@@ -32,6 +32,7 @@ public class CircularQueue <T extends Comparable> {
         }else
             throw  new Exception("queue is empty");
     }
+
     public void display(){
         int tempHead=this.head;
         while(tempHead!=this.tail){

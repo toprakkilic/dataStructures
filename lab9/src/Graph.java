@@ -1,4 +1,4 @@
-public class Graph<T extends Comparable> {
+public class Graph<T extends Comparable<T>> {
     private Vertex<T> graphHead;
 
     public void addVertex(T id) {
@@ -21,13 +21,13 @@ public class Graph<T extends Comparable> {
                 return iterator;
             iterator = iterator.nextVertex;
         }
-        return iterator;
+        return null;
     }
     public void addEdge(T startingVertexID, T endingVertexID) throws Exception {
         Vertex<T> startVertex = findVertex(startingVertexID);
         if(startVertex == null)
             throw new Exception("vertex bulunamadı");
-        Edge<T> newEdge=new Edge(endingVertexID);
+        Edge<T> newEdge= new Edge<>(endingVertexID);
         if(startVertex.edgeLink == null)
             startVertex.edgeLink = newEdge;
         else{
@@ -52,21 +52,29 @@ public class Graph<T extends Comparable> {
             iterator = iterator.nextVertex;
         }
     }
+    
+    public int vertexCount() {
+        Vertex<T> iterator = graphHead;
+        int count = 0;
+        while (iterator != null) {
+            iterator = iterator.nextVertex;
+            count++;
+        }
+        return count;
+    }
 
 
     public int outDegree (T VertexID) {
         Vertex<T> tempVertex = findVertex(VertexID);
         Edge<T> tempEdge = tempVertex.edgeLink;
         int iterator = 0;
-        if (tempEdge == null) {
-            return iterator;
-        }else {
+        if (tempEdge != null) {
             while (tempEdge != null) {
                 iterator++;
                 tempEdge = tempEdge.nextEdge;
             }
-            return iterator;
         }
+        return iterator;
     }
 
 
@@ -87,27 +95,19 @@ public class Graph<T extends Comparable> {
     }
 
         public int[][] adjacencyMatrix() {
-            int i = 0; int j;
-            int[][] array = new int[4][4] ;
-            Vertex<T> iterator = graphHead;
-            while(iterator != null) {
-                Edge<T> TempEdge = iterator.edgeLink;
-                j = 0;
-                while (TempEdge != null) {
-                    if (iterator.vertexID.compareTo(TempEdge.vertexID) == 0) {
-                        array[i][j] = 1;
-                        System.out.println("calisiyo");
-                    }else {
-                        array[i][j] = 0;
-                        System.out.println("calismito");
-                    }
-                    TempEdge = TempEdge.nextEdge;
-                    j++;
+            int i = 0;
+            int[][] array = new int[vertexCount()][vertexCount()];
+            Vertex<T> iteratorVertex = graphHead;
+            while (iteratorVertex != null) {
+                Edge<T> iteratorEdge = iteratorVertex.edgeLink;
+                while (iteratorEdge != null) {
+                    array[i][Integer.parseInt(String.valueOf(iteratorEdge.vertexID))] = 1;
+                    iteratorEdge = iteratorEdge.nextEdge;
                 }
-                iterator = iterator.nextVertex;
+                iteratorVertex = iteratorVertex.nextVertex;
                 i++;
             }
-            return array;
+            return  array;
         }
 
 }
